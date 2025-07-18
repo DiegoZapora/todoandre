@@ -4,16 +4,7 @@ let res = document.getElementById("res")
 let feitas = document.getElementById("feitas")
 
 let tarefas = []
-
-const ADD = () => {
-    res.innerHTML = ""
-    tarefas.map((e) => {
-        let p = document.createElement("p")
-        p.innerHTML = `${e.getTarefa()}`
-        p.classList.add("novo")
-        res.appendChild(p)
-    })
-}
+let tarefaFeitas = []
 
 class novaTarefa {
     constructor (tf) {
@@ -27,6 +18,23 @@ class novaTarefa {
     getTarefa = () => {
         return this.tarefa
     }
+}
+
+const ADD = () => {
+    res.innerHTML = ""
+    tarefas.forEach((e) => {
+        let p = document.createElement("li")
+        p.innerHTML = e.getTarefa()
+        p.classList.toggle("novo")
+        res.appendChild(p)
+        p.addEventListener("click", () => {
+            tarefaFeitas.push(p)
+            res.removeChild(p)
+            tarefas.pop()
+            p.classList.add("feita")
+            feitas.appendChild(p)
+        })
+    })
 }
 
 btnA.addEventListener("click", () => {
