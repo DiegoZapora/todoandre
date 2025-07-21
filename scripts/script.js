@@ -23,17 +23,45 @@ class novaTarefa {
 const ADD = () => {
     res.innerHTML = ""
     tarefas.forEach((e, index) => {
-        let p = document.createElement("li")
+
+        const p = document.createElement("li")
+        const btn = document.createElement("button")
+        const btn_R = document.createElement("button")
+
+        btn.innerHTML = "✅"
+        btn_R.innerHTML = "❌"
+
+        btn.classList.add("class", "btn")
+        btn_R.classList.add("class", "btn")
+
         p.innerHTML = e.getTarefa()
-        p.classList.toggle("novo")
+        p.classList.add("class", "time")
+
         res.appendChild(p)
-        p.addEventListener("click", () => {
+        res.appendChild(btn)
+        res.appendChild(btn_R)
+
+        btn.addEventListener("click", () => {
+
             tarefaFeitas.push(p)
             res.removeChild(p)
+            res.removeChild(btn)
+            res.removeChild(btn_R)
             tarefas.splice(index, 1)
-            p.classList.add("feita")
+            p.classList.remove("class", "time")
+            p.classList.add("class", "feita")
             feitas.appendChild(p)
         })
+
+        btn_R.addEventListener("click", () => {
+
+            res.removeChild(p)
+            res.removeChild(btn)
+            res.removeChild(btn_R)
+            tarefas.splice(index, 1)
+
+        })
+
     })
 }
 
