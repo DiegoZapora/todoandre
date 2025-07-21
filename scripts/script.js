@@ -22,7 +22,7 @@ class novaTarefa {
 
 const ADD = () => {
     res.innerHTML = ""
-    tarefas.forEach((e) => {
+    tarefas.forEach((e, index) => {
         let p = document.createElement("li")
         p.innerHTML = e.getTarefa()
         p.classList.toggle("novo")
@@ -30,7 +30,7 @@ const ADD = () => {
         p.addEventListener("click", () => {
             tarefaFeitas.push(p)
             res.removeChild(p)
-            tarefas.pop()
+            tarefas.splice(index, 1)
             p.classList.add("feita")
             feitas.appendChild(p)
         })
